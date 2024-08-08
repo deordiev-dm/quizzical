@@ -1,0 +1,152 @@
+.title {
+  font-family: "Karla", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.button {
+  font-weight: 600;
+  background-color: #4d5b9e;
+  border-radius: 15px;
+  color: #fff;
+  border: none;
+  transition: all ease 300ms;
+}
+
+.button:hover {
+  background-color: rgb(46, 65, 161);
+  box-shadow:
+    rgba(47, 65, 161, 0.4) -5px 5px,
+    rgba(47, 65, 161, 0.3) -10px 10px,
+    rgba(47, 65, 161, 0.2) -15px 15px,
+    rgba(47, 65, 161, 0.1) -20px 20px,
+    rgba(47, 65, 161, 0.05) -25px 25px;
+}
+
+.button:active {
+  background-color: #4e44dc;
+  transform: scale(0.99);
+  box-shadow:
+    rgba(47, 65, 161, 0.4) -2px 2px,
+    rgba(47, 65, 161, 0.3) -5px 5px,
+    rgba(47, 65, 161, 0.2) -8px 8px,
+    rgba(47, 65, 161, 0.1) -12px 12px,
+    rgba(47, 65, 161, 0.05) -15px 15px;
+}
+
+.svg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  .blob {
+    position: absolute;
+  }
+
+  .yellow-blob {
+    top: 0;
+    right: 0;
+  }
+
+  .blue-blob {
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.initial-screen {
+  padding: 50px;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.initial-screen__title {
+  font-size: 3rem;
+  line-height: calc(37 / 32);
+  text-align: center;
+}
+
+.initial-screen__description {
+  line-height: 1.5;
+  text-wrap: balance;
+  font-size: 1.2rem;
+}
+
+.initial-screen__description,
+.initial-screen__button {
+  text-align: center;
+}
+
+.initial-screen__button {
+  min-width: 210px;
+  min-height: 60px;
+  font-size: 1.3rem;
+
+  font-weight: 500;
+}
+
+.quiz {
+  padding: 50px;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.question {
+  padding-bottom: 15px;
+  border-bottom: 1px solid #dbdef0;
+}
+
+.question__title {
+  font-size: 1.7rem;
+  margin-bottom: 20px;
+}
+
+.question__options {
+  display: flex;
+  gap: 15px;
+}
+
+.question__option {
+  padding: 5px 15px;
+
+  min-width: 90px;
+  min-height: 30px;
+
+  border: 1px solid #4d5b9e;
+  border-radius: 12px;
+
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
+
+  color: #293264;
+  background: transparent;
+}
+
+.question__option.checked {
+  background-color: #d6dbf5;
+}
+
+.quiz__button {
+  min-width: 170px;
+  min-height: 40px;
+  padding: 5px 15px;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
