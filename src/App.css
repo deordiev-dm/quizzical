@@ -120,22 +120,20 @@
 
 .question__option {
   padding: 5px 15px;
-
   min-width: 90px;
   min-height: 30px;
 
   border: 1px solid #4d5b9e;
   border-radius: 12px;
 
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 1rem;
   line-height: 1.2;
   text-align: center;
 
   color: #293264;
-  background: transparent;
-
+  background-color: transparent;
   transition: background-color ease 300ms;
 }
 
@@ -145,6 +143,43 @@
 
 .question__option.selected {
   background-color: #d6dbf5;
+}
+
+.question__option.selected-correct {
+  background-color: #94d7a2;
+  border-color: #94d7a2;
+  cursor: default;
+}
+
+.question__option.wrong {
+  opacity: 0.5;
+}
+
+.question__option.selected-wrong {
+  background-color: #f8bcbc;
+  border-color: #f8bcbc;
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Combined cursor reset for the disabled states */
+.question__option.selected-correct,
+.question__option.selected-wrong,
+.question__option.wrong {
+  cursor: default;
+}
+
+.quiz__footer {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.quiz__result {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .quiz__button {
