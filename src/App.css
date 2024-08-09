@@ -135,9 +135,15 @@
 
   color: #293264;
   background: transparent;
+
+  transition: background-color ease 300ms;
 }
 
-.question__option.checked {
+.question__option:hover {
+  background-color: #e2e5f4;
+}
+
+.question__option.selected {
   background-color: #d6dbf5;
 }
 

@@ -1,17 +1,14 @@
-import { nanoid } from "nanoid";
-import { decode } from "html-entities";
-
 function Question(props) {
-  const buttons = props.options.map(option => {
-    const buttonId = nanoid();
+  const buttons = props.answers.map(answer => {
     return (
       <button
-        className="question__option"
-        key={nanoid()}
-        id={buttonId}
-        onClick={() => props.chooseOption(props.id, buttonId)}
+        key={answer.id}
+        className={`question__option ${
+          props.selectedAnswerId === answer.id ? "selected" : ""
+        }`}
+        onClick={() => props.chooseAnswer(props.questionId, answer.id)}
       >
-        {decode(option)}
+        {answer.value}
       </button>
     );
   });
