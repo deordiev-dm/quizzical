@@ -39,6 +39,21 @@
     rgba(47, 65, 161, 0.05) -15px 15px;
 }
 
+.difficulty-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.button-difficulty {
+  min-width: 100px;
+  min-height: 40px;
+}
+
+.button-difficulty.active {
+  background-color: #94d7a2;
+  color: #000;
+}
+
 .svg-container {
   position: absolute;
   top: 0;

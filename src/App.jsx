@@ -6,14 +6,21 @@ import "./App.css";
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [difficulty, setDifficulty] = useState("easy");
 
   return (
     <main>
       <div className="container">
         {isPlaying ? (
-          <MainScreen />
+          <MainScreen
+            difficulty={difficulty}
+            setDifficulty={setDifficulty}
+          />
         ) : (
-          <InitialScreen startNewGame={() => setIsPlaying(true)} />
+          <InitialScreen
+            startNewGame={() => setIsPlaying(true)}
+            setDifficulty={setDifficulty}
+          />
         )}
         <SvgContainer />
       </div>

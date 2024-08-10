@@ -1,3 +1,5 @@
+import DifficultyButtons from "./DifficultyButtons";
+
 function InitialScreen(props) {
   return (
     <section className="initial-screen">
@@ -13,6 +15,7 @@ function InitialScreen(props) {
       >
         Start quiz
       </button>
+      <DifficultyButtons setDifficulty={props.setDifficulty} />
     </section>
   );
 }

@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import Question from "./Question";
+import DifficultyButtons from "./DifficultyButtons";
 import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import Confetti from "react-confetti";
 
-function MainScreen() {
+function MainScreen(props) {
   const [allQuestions, setAllQuestions] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +23,7 @@ function MainScreen() {
       async function fetchQuestions() {
         try {
           const response = await fetch(
-            "https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple"
+            `https://opentdb.com/api.php?amount=5&category=9&difficulty=${props.difficulty}&type=multiple`
           );
 
           if (response.status !== 200) {
@@ -153,7 +154,10 @@ function MainScreen() {
           {isChecked ? "Play again" : "Check answers"}
         </button>
         {isChecked && (
-          <p className="quiz__result">{`You scored ${countCorrectAnswers()}/5 correct answers`}</p>
+          <>
+            <p className="quiz__result">{`You scored ${countCorrectAnswers()}/5 correct answers`}</p>
+            <DifficultyButtons setDifficulty={props.setDifficulty} />
+          </>
         )}
       </footer>
     </section>
