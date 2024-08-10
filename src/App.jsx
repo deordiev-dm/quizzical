@@ -9,12 +9,14 @@ function App() {
 
   return (
     <main>
-      {isPlaying ? (
-        <MainScreen />
-      ) : (
-        <InitialScreen startNewGame={() => setIsPlaying(true)} />
-      )}
-      <SvgContainer />
+      <div className="container">
+        {isPlaying ? (
+          <MainScreen />
+        ) : (
+          <InitialScreen startNewGame={() => setIsPlaying(true)} />
+        )}
+        <SvgContainer />
+      </div>
     </main>
   );
 }

@@ -16,8 +16,9 @@ import Confetti from "react-confetti";
  * // // todo: write the logic for starting a new game
  * // todo: imporove styles:
  *         // // todo: give .selected class to the selected option
- *         // todo: make a question underline span the whole width of a container
- *         // todo: create a smaller container
+ *         // // todo: make a question underline span the whole width of a container
+ *         // // todo: create a smaller container
+ *         // todo: create a preloader
  * // todo: make a call to an API when the page first loads
  *         // ? I'm not sure if it's not a memory leak. Try it.
  */
@@ -25,6 +26,7 @@ import Confetti from "react-confetti";
 function MainScreen() {
   const [allQuestions, setAllQuestions] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const hasFetchedData = useRef(false);
 
   // pull questions data from openTriviaDB
@@ -33,15 +35,17 @@ function MainScreen() {
   function fetchNewQuestions() {
     // if ref wasn't updated it will not fetch new data
     if (!hasFetchedData.current) {
+      setIsLoading(true);
       hasFetchedData.current = true;
-
-      console.log("fetching new data");
 
       fetch(
         "https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple"
       )
         .then(res => res.json())
-        .then(data => setAllQuestions(data.results?.map(constructQuestionObj)));
+        .then(data => {
+          setAllQuestions(data.results?.map(constructQuestionObj));
+          setIsLoading(false);
+        });
     }
   }
 
@@ -98,12 +102,18 @@ function MainScreen() {
   }
 
   function handleClick() {
-    setIsChecked(prevState => {
-      if (prevState) {
+    setIsChecked(prevIsChecked => {
+      // play again button is clicked
+      if (prevIsChecked) {
         hasFetchedData.current = false;
       }
 
-      return !prevState;
+      // check answers button is clicked
+      if (allQuestions.every(question => question.selectedAnswerId)) {
+        return !prevIsChecked;
+      } else {
+        alert("Please choose an answer for every question");
+      }
     });
   }
 
@@ -127,12 +137,17 @@ function MainScreen() {
     });
   }
 
-  console.log(isChecked);
+  if (isLoading) {
+    return (
+      <div className="loader__container">
+        <div className="loader"></div>
+      </div>
+    );
+  }
 
   return (
     <section className="quiz">
       {isChecked && countCorrectAnswers() === 5 && <Confetti />}
-
       {questionComponents}
       <footer className="quiz__footer">
         <button
