@@ -40,7 +40,9 @@
 }
 
 .difficulty-buttons {
+  justify-content: center;
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
@@ -132,12 +134,6 @@
   margin-bottom: 20px;
 }
 
-@media (max-width: 480px) {
-  .question__title {
-    font-size: 1.2rem;
-  }
-}
-
 .question__options {
   display: flex;
   flex-wrap: wrap;
@@ -161,7 +157,7 @@
 
   color: #293264;
   background-color: transparent;
-  transition: background-color ease 300ms;
+  transition: background-color ease 100ms;
 }
 
 .question__option:hover {
@@ -276,5 +272,14 @@
   }
   100% {
     inset: 0 35px 35px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .question__title {
+    font-size: 1.2rem;
+  }
+  .button-difficulty {
+    min-width: 60px;
   }
 }
