@@ -4,25 +4,6 @@ import { nanoid } from "nanoid";
 import { decode } from "html-entities";
 import Confetti from "react-confetti";
 
-/*
- * // // todo: redesign allQuestion state
- *         // // todo: give an ID to all option when creating state
- *         // // todo: give an ID to a question when creating state
- *         // // todo: complete the chooseAnswer function
- * // // todo: write the logic for checking correct answers:
- *         // // todo: count the number of correct answers
- *         // // todo: check if an answer is selected for every question
- *         // // todo: make sure user can't select anything after answers were checked
- * // // todo: write the logic for starting a new game
- * // todo: imporove styles:
- *         // // todo: give .selected class to the selected option
- *         // // todo: make a question underline span the whole width of a container
- *         // // todo: create a smaller container
- *         // todo: create a preloader
- * // todo: make a call to an API when the page first loads
- *         // ? I'm not sure if it's not a memory leak. Try it.
- */
-
 function MainScreen() {
   const [allQuestions, setAllQuestions] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
@@ -38,14 +19,30 @@ function MainScreen() {
       setIsLoading(true);
       hasFetchedData.current = true;
 
-      fetch(
-        "https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple"
-      )
-        .then(res => res.json())
-        .then(data => {
+      async function fetchQuestions() {
+        try {
+          const response = await fetch(
+            "https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple"
+          );
+
+          if (response.status !== 200) {
+            throw new Error(`Failed to fetch: Status ${response.status}`);
+          }
+
+          const data = await response.json();
+
           setAllQuestions(data.results?.map(constructQuestionObj));
+        } catch (error) {
+          console.error("Failed to fetch questions: ", error);
+          alert(
+            "Something went wrong when loading questions. Please, try to reload the page"
+          );
+        } finally {
           setIsLoading(false);
-        });
+        }
+      }
+
+      fetchQuestions();
     }
   }
 
@@ -74,7 +71,6 @@ function MainScreen() {
     return arr.sort(() => Math.random() - 0.5);
   }
 
-  // event handlers
   // choose or change an option
   function chooseAnswer(questionId, answerId) {
     setAllQuestions(prevQuestions => {
